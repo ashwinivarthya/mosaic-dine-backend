@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/assets/Dine.png">
+    <title>My Orders | Mosaic Dine</title>
+    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- ==========================
+         HEADER
+    ========================== -->
+    <header class="orders-header">
+        <h2>
+            <i class="fa fa-cutlery"></i>
+            Mosaic Dine
+        </h2>
+        <a href="Menu.html">
+            <i class="fa fa-arrow-left"></i>
+            Back to Menu
+        </a>
+    </header>
+    <!-- ==========================
+         MAIN CONTENT
+    ========================== -->
+    <main class="orders-container">
+        <div class="page-title">
+            <h1>
+                My Orders
+            </h1>
+            <p>
+                View your previous and current orders
+            </p>
+        </div>
+        <!-- ==========================
+             ORDERS WILL LOAD HERE
+        ========================== -->
+        <div id="ordersContainer">
+            <div class="loading">
+                <i class="fa fa-spinner fa-spin"></i>
+                <p>
+                    Loading your orders...
+                </p>
+            </div>
+        </div>
+    </main>
+    <!-- ==========================
+         JAVASCRIPT
+    ========================== -->
+    <script>
+        const API_URL =
+            "http://localhost:3000";
+        /* ==========================
+           LOAD CUSTOMER ORDERS
+        ========================== */
+        async function loadOrders() {
+            const container =
+                document.getElementById(
+                    "ordersContainer"
+                );
+            /* ==========================
+               GET LOGGED-IN USER
+            ========================== */
+            let loggedInUser =
+                localStorage.getItem(
+                    "mosaicDineUser"
+                );
+            /*
+                Fallback to loggedInUser
+                if mosaicDineUser is not available.
+            */
+            if (!loggedInUser) {
+                loggedInUser =
+                    localStorage.getItem(
+                        "loggedInUser"
+                    );
+            }
+            /* ==========================
+               LOGIN CHECK
+            ========================== */
+            if (!loggedInUser) {
+                container.innerHTML = `
+                    <div class="empty-orders">
+                        <i class="fa fa-user"></i>
+                        <h2>
+                            Please Login
+                        </h2>
+                        <p>
+                            Please login to view your orders.
+                        </p>
+                        <a
+                            href="Login.html"
+                            class="menu-btn"
+                        >
+                            Login
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+            /* ==========================
+               PARSE USER DATA
+            ========================== */
+            try {
+                loggedInUser =
+                    JSON.parse(
+                        loggedInUser
+                    );
+            } catch (error) {
+                console.error(
+                    "User data error:",
+                    error
+                );
+                container.innerHTML = `
+                    <div class="error-message">
+                        Unable to read login information.
+                    </div>
+                `;
+                return;
+            }
+            const email =
+                loggedInUser.email;
+            if (!email) {
+                container.innerHTML = `
+                    <div class="error-message">
+                        Customer email not found.
+                        Please login again.
+                    </div>
+                `;
+                return;
+            }
+            /* ==========================
+               FETCH ORDERS
+            ========================== */
+            try {
+                const response =
+                    await fetch(
+                        `${API_URL}/api/orders/customer/${encodeURIComponent(email)}`
+                    );
+                const result =
+                    await response.json();
+                console.log(
+                    "Customer Orders:",
+                    result
+                );
+                if (
+                    !response.ok ||
+                    !result.success
+                ) {
+                    throw new Error(
+                        result.message ||
+                        "Unable to load orders."
+                    );
+                }
+                /* ==========================
+                   NO ORDERS
+                ========================== */
+                if (
+                    !result.orders ||
+                    result.orders.length === 0
+                ) {
+                    container.innerHTML = `
+                        <div class="empty-orders">
+                            <i class="fa fa-shopping-bag"></i>
+                            <h2>
+                                No Orders Yet
+                            </h2>
+                            <p>
+                                You haven't placed any orders yet.
+                            </p>
+                            <a
+                                href="Menu.html"
+                                class="menu-btn"
+                            >
+                                Browse Menu
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+                /* ==========================
+                   DISPLAY ORDERS
+                ========================== */
+                container.innerHTML =
+                    result.orders
+                        .map(
+                            createOrderCard
+                        )
+                        .join("");
+            } catch (error) {
+                console.error(
+                    "Orders Error:",
+                    error
+                );
+                container.innerHTML = `
+                    <div class="error-message">
+                        <i class="fa fa-exclamation-circle"></i>
+                        <p>
+                            ${escapeHTML(
+                    error.message
+                )}
+                        </p>
+                        <p>
+                            Please make sure the server is running.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        /* ==========================
+           CREATE ORDER CARD
+        ========================== */
+        function createOrderCard(order) {
+            /* ==========================
+               DATE
+            ========================== */
+            const orderDate =
+                order.orderDate
+                    ? new Date(
+                        order.orderDate
+                    ).toLocaleString(
+                        "en-IN",
+                        {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        }
+                    )
+                    : "N/A";
+            /* ==========================
+               ITEMS
+            ========================== */
+            const items =
+                Array.isArray(order.items)
+                    ? order.items
+                    : [];
+            const itemsHTML =
+                items
+                    .map(
+                        function (item) {
+                            const name =
+                                item.name ||
+                                item.title ||
+                                "Item";
+                            const quantity =
+                                Number(
+                                    item.quantity ||
+                                    item.qty ||
+                                    1
+                                );
+                            const price =
+                                Number(
+                                    item.price ||
+                                    0
+                                );
+                            return `
+                                <div class="order-item">
+                                    <div>
+                                        <span class="item-name">
+                                            ${escapeHTML(
+                                name
+                            )}
+                                        </span>
+                                        <span class="item-quantity">
+                                            × ${quantity}
+                                        </span>
+                                    </div>
+                                    <div class="item-price">
+                                        ₹${(
+                                    price *
+                                    quantity
+                                ).toFixed(2)}
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    )
+                    .join("");
+            /* ==========================
+               ADDRESS
+            ========================== */
+            const fullAddress =
+                `${escapeHTML(order.address || "")},
+                 ${escapeHTML(order.city || "")}
+                 - ${escapeHTML(order.pincode || "")}`;
+            /* ==========================
+               PAYMENT
+            ========================== */
+            const payment =
+                escapeHTML(
+                    order.paymentMethod ||
+                    "N/A"
+                );
+            /* ==========================
+               STATUS
+            ========================== */
+            const rawStatus =
+                String(
+                    order.status ||
+                    "Placed"
+                )
+                    .trim();
+            const status =
+                escapeHTML(
+                    rawStatus
+                );
+            /* ==========================
+               STATUS TRACKER
+            ========================== */
+            const trackingHTML =
+                createStatusTracker(
+                    rawStatus
+                );
+            /* ==========================
+               CANCELLED
+            ========================== */
+            const cancelled =
+                rawStatus.toLowerCase() ===
+                "cancelled";
+            const cancelledHTML =
+                cancelled
+                    ? `
+                        <div class="cancelled-box">
+                            <i class="fa fa-times-circle"></i>
+                            This order has been cancelled.
+                        </div>
+                    `
+                    : "";
+            /* ==========================
+               STATUS CLASS
+            ========================== */
+            const statusClass =
+                cancelled
+                    ? "status cancelled-status"
+                    : "status";
+            /* ==========================
+               RETURN CARD
+            ========================== */
+            return `
+                <div class="order-card">
+                    <!-- ==========================
+                         ORDER HEADER
+                    ========================== -->
+                    <div class="order-top">
+                        <div>
+                            <div class="order-id">
+                                Order ID:
+                                ${escapeHTML(
+                order.orderId ||
+                "N/A"
+            )}
+                            </div>
+                            <div class="order-date">
+                                <i class="fa fa-calendar"></i>
+                                ${orderDate}
+                            </div>
+                        </div>
+                        <span class="${statusClass}">
+                            ${status}
+                        </span>
+                    </div>
+                    ${cancelledHTML}
+                    <!-- ==========================
+                         ORDER TRACKING
+                    ========================== -->
+                    ${trackingHTML}
+                    <!-- ==========================
+                         ORDER ITEMS
+                    ========================== -->
+                    <h3 class="items-title">
+                        <i class="fa fa-shopping-bag"></i>
+                        Ordered Items
+                    </h3>
+                    <div>
+                        ${itemsHTML}
+                    </div>
+                    <!-- ==========================
+                         ORDER DETAILS
+                    ========================== -->
+                    <div class="order-details">
+                        <div class="detail-box">
+                            <strong>
+                                <i class="fa fa-credit-card"></i>
+                                Payment
+                            </strong>
+                            <span>
+                                ${payment}
+                            </span>
+                        </div>
+                        <div class="detail-box">
+                            <strong>
+                                <i class="fa fa-phone"></i>
+                                Phone
+                            </strong>
+                            <span>
+                                ${escapeHTML(
+                order.customerPhone ||
+                "N/A"
+            )}
+                            </span>
+                        </div>
+                        <div class="detail-box">
+                            <strong>
+                                <i class="fa fa-map-marker"></i>
+                                Delivery Address
+                            </strong>
+                            <span>
+                                ${fullAddress}
+                            </span>
+                        </div>
+                        <div class="detail-box">
+                            <strong>
+                                <i class="fa fa-user"></i>
+                                Customer
+                            </strong>
+                            <span>
+                                ${escapeHTML(
+                order.customerName ||
+                "N/A"
+            )}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- ==========================
+                         TOTAL
+                    ========================== -->
+                    <div class="order-total">
+                        Total:
+                        ₹${Number(
+                order.total || 0
+            ).toFixed(2)}
+                    </div>
+                </div>
+            `;
+        }
+        /* ==========================
+           CREATE STATUS TRACKER
+        ========================== */
+        function createStatusTracker(status) {
+            const statuses = [
+                {
+                    name: "Placed",
+                    icon: "fa-shopping-bag"
+                },
+                {
+                    name: "Confirmed",
+                    icon: "fa-check"
+                },
+                {
+                    name: "Preparing",
+                    icon: "fa-cutlery"
+                },
+                {
+                    name: "Out for Delivery",
+                    icon: "fa-motorcycle"
+                },
+                {
+                    name: "Delivered",
+                    icon: "fa-home"
+                }
+            ];
+            const normalizedStatus =
+                String(
+                    status ||
+                    "Placed"
+                )
+                    .toLowerCase()
+                    .trim();
+            /* ==========================
+               CANCELLED
+            ========================== */
+            if (
+                normalizedStatus ===
+                "cancelled"
+            ) {
+                return "";
+            }
+            /* ==========================
+               FIND CURRENT STATUS
+            ========================== */
+            let currentIndex =
+                statuses.findIndex(
+                    function (item) {
+                        return (
+                            item.name
+                                .toLowerCase() ===
+                            normalizedStatus
+                        );
+                    }
+                );
+            /*
+                If unknown status is received,
+                keep tracker at Placed.
+            */
+            if (currentIndex === -1) {
+                currentIndex = 0;
+            }
+            /* ==========================
+               PROGRESS
+            ========================== */
+            const progress =
+                (currentIndex /
+                    (statuses.length - 1)) *
+                100;
+            /* ==========================
+               STATUS STEPS
+            ========================== */
+            const stepsHTML =
+                statuses
+                    .map(
+                        function (
+                            item,
+                            index
+                        ) {
+                            let stepClass =
+                                "";
+                            if (
+                                index <
+                                currentIndex
+                            ) {
+                                stepClass =
+                                    "completed";
+                            }
+                            else if (
+                                index ===
+                                currentIndex
+                            ) {
+                                stepClass =
+                                    "current";
+                            }
+                            return `
+                                <div
+                                    class="status-step ${stepClass}"
+                                >
+                                    <div class="status-circle">
+                                        <i
+                                            class="fa ${item.icon}"
+                                        ></i>
+                                    </div>
+                                    <span class="status-label">
+                                        ${item.name}
+                                    </span>
+                                </div>
+                            `;
+                        }
+                    )
+                    .join("");
+            /* ==========================
+               RETURN TRACKER
+            ========================== */
+            return `
+                <div class="tracking-section">
+                    <h3 class="tracking-title">
+                        <i class="fa fa-truck"></i>
+                        Order Status
+                    </h3>
+                    <div class="status-tracker">
+                        <div class="status-line">
+                            <div
+                                class="status-progress"
+                                style="width: ${progress}%"
+                            ></div>
+                        </div>
+                        ${stepsHTML}
+                    </div>
+                </div>
+            `;
+        }
+        /* ==========================
+           ESCAPE HTML
+        ========================== */
+        function escapeHTML(value) {
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+        }
+        /* ==========================
+           START
+        ========================== */
+        loadOrders();
+    </script>
+</body>
+
+</html>

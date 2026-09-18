@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/assets/Dine.png">
+    <title>Mosaic Dine | Delicious Moments</title>
+    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="/assets/Dine.png" alt="Mosaic Dine Logo">
+            </a>
+            <span>
+                Mosaic <strong>Dine</strong>
+            </span>
+        </div>
+        <!-- ================= THREE DOT MENU ================= -->
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu"
+            aria-expanded="false">
+            <i class="fa fa-ellipsis-v"></i>
+        </button>
+        <!-- ================= NAVIGATION ================= -->
+        <nav class="navbar" id="mainNavbar">
+            <a href="index.html" class="active">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+            <a href="About.html">
+                <i class="fa fa-info-circle"></i>
+                About
+            </a>
+            <a href="Menu.html">
+                <i class="fa fa-cutlery"></i>
+                Menu
+            </a>
+            <!-- ================= ADMIN ================= -->
+            <a href="Admin.html" id="adminNavLink" style="display: none;">
+                <i class="fa fa-dashboard"></i>
+                Admin
+            </a>
+            <a href="Contact.html">
+                <i class="fa fa-envelope"></i>
+                Contact
+            </a>
+            <!-- ================= MY ORDERS ================= -->
+            <a href="MyOrders.html" id="myOrdersNavLink" style="display: none;">
+                <i class="fa fa-shopping-bag"></i>
+                My Orders
+            </a>
+            <!-- ================= LOGIN ================= -->
+            <a href="Login.html" id="loginNavLink">
+                <i class="fa fa-sign-in"></i>
+                Login
+            </a>
+            <!-- ================= SIGN UP ================= -->
+            <a href="Signup.html" id="signupNavLink">
+                <i class="fa fa-user-plus"></i>
+                Sign Up
+            </a>
+            <!-- ================= LOGOUT ================= -->
+            <a href="#" id="logoutNavLink" style="display: none;">
+                <i class="fa fa-sign-out"></i>
+                Logout
+            </a>
+        </nav>
+    </header>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="welcome-text">
+                WELCOME TO MOSAIC DINE
+            </span>
+            <h1>
+                Delight in Rich<br>
+                <span>Authentic Flavors</span>
+            </h1>
+            <p>
+                From soothing brews to sizzling bites,
+                every flavor tells a story.
+            </p>
+            <!-- ================= SEARCH ================= -->
+            <div class="search-container">
+                <div class="search-input">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="dishInput" placeholder="Search dishes or cuisines">
+                </div>
+                <div class="search-input">
+                    <i class="fa fa-cutlery"></i>
+                    <input type="text" id="mealInput" placeholder="Breakfast, Lunch, Dinner...">
+                </div>
+                <button id="searchBtn">
+                    Search
+                </button>
+            </div>
+            <!-- ================= HERO BUTTONS ================= -->
+            <div class="hero-buttons">
+                <a href="Menu.html" class="primary-btn">
+                    Explore Menu
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+                <a href="About.html" class="secondary-btn">
+                    Our Story
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- ================= CATEGORIES ================= -->
+    <section class="categories">
+        <div class="section-heading">
+            <span>
+                EXPLORE OUR MENU
+            </span>
+            <h2>
+                Something Delicious<br>
+                For Every Moment
+            </h2>
+            <p>
+                Whether you're starting your morning
+                or ending your day, we've got something special for you.
+            </p>
+        </div>
+        <div class="category-grid">
+            <!-- ================= BREAKFAST ================= -->
+            <div class="category-card">
+                <div class="image-container">
+                    <img src="/assets/breakfast.png" alt="Breakfast">
+                </div>
+                <div class="category-info">
+                    <span>
+                        START YOUR DAY
+                    </span>
+                    <h3>
+                        Breakfast
+                    </h3>
+                    <p>
+                        Fresh and delicious morning favorites.
+                    </p>
+                    <a href="Menu.html?meal=breakfast" class="category-link">
+                        Explore
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ================= LUNCH ================= -->
+            <div class="category-card">
+                <div class="image-container">
+                    <img src="/assets/lunch.png" alt="Lunch">
+                </div>
+                <div class="category-info">
+                    <span>
+                        MIDDAY FAVORITES
+                    </span>
+                    <h3>
+                        Lunch
+                    </h3>
+                    <p>
+                        Wholesome meals prepared with fresh ingredients.
+                    </p>
+                    <a href="Menu.html?meal=lunch" class="category-link">
+                        Explore
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ================= DINNER ================= -->
+            <div class="category-card">
+                <div class="image-container">
+                    <img src="/assets/dinner.png" alt="Dinner">
+                </div>
+                <div class="category-info">
+                    <span>
+                        EVENING SPECIALS
+                    </span>
+                    <h3>
+                        Dinner
+                    </h3>
+                    <p>
+                        Rich flavors perfect for a memorable evening.
+                    </p>
+                    <a href="Menu.html?meal=dinner" class="category-link">
+                        Explore
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ================= SNACKS ================= -->
+            <div class="category-card">
+                <div class="image-container">
+                    <img src="/assets/snacks.png" alt="Snacks">
+                </div>
+                <div class="category-info">
+                    <span>
+                        QUICK BITES
+                    </span>
+                    <h3>
+                        Snacks
+                    </h3>
+                    <p>
+                        Perfect little bites for every craving.
+                    </p>
+                    <a href="Menu.html?meal=snacks" class="category-link">
+                        Explore
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ================= DESSERTS ================= -->
+            <div class="category-card">
+                <div class="image-container">
+                    <img src="/assets/desserts.png" alt="Desserts">
+                </div>
+                <div class="category-info">
+                    <span>
+                        SWEET TREATS
+                    </span>
+                    <h3>
+                        Desserts
+                    </h3>
+                    <p>
+                        Delicious sweet treats to end your meal perfectly.
+                    </p>
+                    <a href="Menu.html?meal=desserts" class="category-link">
+                        Explore
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================= CTA ================= -->
+    <section class="order-section">
+        <div class="order-content">
+            <span>
+                HUNGRY ALREADY?
+            </span>
+            <h2>
+                Good Food.<br>
+                Good Mood.
+            </h2>
+            <p>
+                Discover your next favorite dish at Mosaic Dine.
+            </p>
+            <a href="Menu.html" class="order-btn">
+                Order Now
+                <i class="fa fa-shopping-bag"></i>
+            </a>
+        </div>
+    </section>
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- ================= FOOTER BRAND ================= -->
+            <div class="footer-brand">
+                <h2>
+                    Mosaic <span>Dine</span>
+                </h2>
+                <p>
+                    Bringing people together through delicious food,
+                    warm hospitality and memorable moments.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Google">
+                        <i class="fa fa-google"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <i class="fa fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ================= QUICK LINKS ================= -->
+            <div class="footer-column">
+                <h3>
+                    Quick Links
+                </h3>
+                <a href="index.html">
+                    Home
+                </a>
+                <a href="About.html">
+                    About
+                </a>
+                <a href="Menu.html">
+                    Menu
+                </a>
+                <a href="Contact.html">
+                    Contact
+                </a>
+            </div>
+            <!-- ================= ACCOUNT ================= -->
+            <div class="footer-column">
+                <h3>
+                    Account
+                </h3>
+                <a href="Login.html">
+                    Login
+                </a>
+                <a href="Signup.html">
+                    Sign Up
+                </a>
+                <a href="MyOrders.html">
+                    My Orders
+                </a>
+            </div>
+            <!-- ================= CONTACT ================= -->
+            <div class="footer-column">
+                <h3>
+                    Contact
+                </h3>
+                <p>
+                    <i class="fa fa-map-marker"></i>
+                    Sangareddy, Telangana
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i>
+                    +91 9666987128
+                </p>
+                <p>
+                    <i class="fa fa-envelope"></i>
+                    contact@mosaicdine.com
+                </p>
+            </div>
+        </div>
+        <!-- ================= FOOTER BOTTOM ================= -->
+        <div class="footer-bottom">
+            <p>
+                &copy; 2025 Mosaic Dine. All Rights Reserved.
+            </p>
+            <p>
+                Designed by
+                <strong>Jadavath Varthya Ashwini</strong>
+            </p>
+        </div>
+    </footer>
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        /* =====================================================
+           THREE-DOT MOBILE / TABLET MENU
+           ===================================================== */
+        const mobileMenuToggle =
+            document.getElementById(
+                "mobileMenuToggle"
+            );
+        const mainNavbar =
+            document.getElementById(
+                "mainNavbar"
+            );
+        if (
+            mobileMenuToggle &&
+            mainNavbar
+        ) {
+            /* ================= OPEN / CLOSE MENU ================= */
+            mobileMenuToggle.addEventListener(
+                "click",
+                function (event) {
+                    event.stopPropagation();
+                    const isOpen =
+                        mainNavbar.classList.toggle(
+                            "mobile-menu-open"
+                        );
+                    mobileMenuToggle.setAttribute(
+                        "aria-expanded",
+                        isOpen
+                    );
+                }
+            );
+            /* ================= CLOSE AFTER LINK CLICK ================= */
+            const navLinks =
+                mainNavbar.querySelectorAll("a");
+            navLinks.forEach(
+                function (link) {
+                    link.addEventListener(
+                        "click",
+                        function () {
+                            mainNavbar.classList.remove(
+                                "mobile-menu-open"
+                            );
+                            mobileMenuToggle.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+                        }
+                    );
+                }
+            );
+            /* ================= CLOSE OUTSIDE MENU ================= */
+            document.addEventListener(
+                "click",
+                function (event) {
+                    if (
+                        !mainNavbar.contains(event.target) &&
+                        !mobileMenuToggle.contains(event.target)
+                    ) {
+                        mainNavbar.classList.remove(
+                            "mobile-menu-open"
+                        );
+                        mobileMenuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+                    }
+                }
+            );
+        }
+        /* =====================================================
+           CUSTOMER NAVIGATION
+           ===================================================== */
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+                const myOrdersNavLink =
+                    document.getElementById(
+                        "myOrdersNavLink"
+                    );
+                const loginNavLink =
+                    document.getElementById(
+                        "loginNavLink"
+                    );
+                const signupNavLink =
+                    document.getElementById(
+                        "signupNavLink"
+                    );
+                const logoutNavLink =
+                    document.getElementById(
+                        "logoutNavLink"
+                    );
+                /*
+                    Check customer login.
+                    Login.html stores the customer
+                    in loggedInUser.
+                */
+                const loggedInUser =
+                    localStorage.getItem(
+                        "loggedInUser"
+                    );
+                /* =================================================
+                   CUSTOMER LOGGED IN
+                   ================================================= */
+                if (loggedInUser) {
+                    /*
+                        Show My Orders
+                    */
+                    if (myOrdersNavLink) {
+                        myOrdersNavLink.style.display =
+                            "inline-block";
+                    }
+                    /*
+                        Show Logout
+                    */
+                    if (logoutNavLink) {
+                        logoutNavLink.style.display =
+                            "inline-block";
+                    }
+                    /*
+                        Hide Login
+                    */
+                    if (loginNavLink) {
+                        loginNavLink.style.display =
+                            "none";
+                    }
+                    /*
+                        Hide Sign Up
+                    */
+                    if (signupNavLink) {
+                        signupNavLink.style.display =
+                            "none";
+                    }
+                }
+                /* =================================================
+                   CUSTOMER NOT LOGGED IN
+                   ================================================= */
+                else {
+                    /*
+                        Hide My Orders
+                    */
+                    if (myOrdersNavLink) {
+                        myOrdersNavLink.style.display =
+                            "none";
+                    }
+                    /*
+                        Hide Logout
+                    */
+                    if (logoutNavLink) {
+                        logoutNavLink.style.display =
+                            "none";
+                    }
+                    /*
+                        Show Login
+                    */
+                    if (loginNavLink) {
+                        loginNavLink.style.display =
+                            "inline-block";
+                    }
+                    /*
+                        Show Sign Up
+                    */
+                    if (signupNavLink) {
+                        signupNavLink.style.display =
+                            "inline-block";
+                    }
+                }
+                /* =================================================
+                   LOGOUT
+                   ================================================= */
+                if (logoutNavLink) {
+                    logoutNavLink.addEventListener(
+                        "click",
+                        function (event) {
+                            event.preventDefault();
+                            /*
+                                Remove customer session
+                            */
+                            localStorage.removeItem(
+                                "loggedInUser"
+                            );
+                            localStorage.removeItem(
+                                "mosaicDineUser"
+                            );
+                            /*
+                                Close mobile menu
+                            */
+                            if (mainNavbar) {
+                                mainNavbar.classList.remove(
+                                    "mobile-menu-open"
+                                );
+                            }
+                            if (mobileMenuToggle) {
+                                mobileMenuToggle.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+                            }
+                            /*
+                                Logout message
+                            */
+                            alert(
+                                "You have been logged out successfully."
+                            );
+                            /*
+                                Return to home page
+                            */
+                            window.location.href =
+                                "Index.html";
+                        }
+                    );
+                }
+            }
+        );
+        /* =====================================================
+           ADMIN NAVIGATION
+           ===================================================== */
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+                const adminNavLink =
+                    document.getElementById(
+                        "adminNavLink"
+                    );
+                if (!adminNavLink) {
+                    console.error(
+                        "Admin navigation link not found."
+                    );
+                    return;
+                }
+                const adminLoggedIn =
+                    localStorage.getItem(
+                        "adminLoggedIn"
+                    );
+                const adminToken =
+                    localStorage.getItem(
+                        "adminToken"
+                    );
+                console.log(
+                    "Admin Logged In:",
+                    adminLoggedIn
+                );
+                console.log(
+                    "Admin Token:",
+                    adminToken
+                );
+                /*
+                    Show Admin link only when:
+                    adminLoggedIn = true
+                    AND
+                    adminToken exists
+                */
+                if (
+                    adminLoggedIn === "true" &&
+                    adminToken &&
+                    adminToken !== "null" &&
+                    adminToken !== "undefined" &&
+                    adminToken.trim() !== ""
+                ) {
+                    adminNavLink.style.display =
+                        "inline-block";
+                    console.log(
+                        "ADMIN LINK IS VISIBLE"
+                    );
+                }
+                else {
+                    adminNavLink.style.display =
+                        "none";
+                    console.log(
+                        "ADMIN LINK IS HIDDEN"
+                    );
+                }
+            }
+        );
+        /* =====================================================
+           SEARCH
+           ===================================================== */
+        const searchBtn =
+            document.getElementById(
+                "searchBtn"
+            );
+        const dishInput =
+            document.getElementById(
+                "dishInput"
+            );
+        const mealInput =
+            document.getElementById(
+                "mealInput"
+            );
+        function performSearch() {
+            const dish =
+                dishInput.value.trim();
+            const meal =
+                mealInput.value.trim();
+            if (
+                dish === "" &&
+                meal === ""
+            ) {
+                alert(
+                    "Please enter a dish, cuisine or meal type."
+                );
+                return;
+            }
+            const url =
+                `Menu.html?dish=${encodeURIComponent(dish)}&meal=${encodeURIComponent(meal)}`;
+            window.location.href =
+                url;
+        }
+        searchBtn.addEventListener(
+            "click",
+            performSearch
+        );
+        dishInput.addEventListener(
+            "keydown",
+            function (event) {
+                if (event.key === "Enter") {
+                    performSearch();
+                }
+            }
+        );
+        mealInput.addEventListener(
+            "keydown",
+            function (event) {
+                if (event.key === "Enter") {
+                    performSearch();
+                }
+            }
+        );
+    </script>
+</body>
+
+</html>

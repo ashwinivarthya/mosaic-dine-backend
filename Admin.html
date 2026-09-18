@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/Dine.png">
+    <title>Admin | Mosaic Dine</title>
+    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- ==================================================
+     HEADER
+================================================== -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="/assets/Dine.png" alt="Mosaic Dine Logo">
+            </a>
+            <span>
+                Mosaic <strong>Dine</strong>
+            </span>
+        </div>
+        <!-- THREE DOT MENU -->
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu"
+            aria-expanded="false">
+            <i class="fa fa-ellipsis-v"></i>
+        </button>
+        <nav class="navbar" id="mainNavbar">
+            <a href="index.html">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+            <a href="About.html">
+                <i class="fa fa-info-circle"></i>
+                About
+            </a>
+            <a href="Menu.html">
+                <i class="fa fa-cutlery"></i>
+                Menu
+            </a>
+            <a href="Contact.html">
+                <i class="fa fa-envelope"></i>
+                Contact
+            </a>
+            <a href="Admin.html" class="active">
+                <i class="fa fa-dashboard"></i>
+                Admin
+            </a>
+        </nav>
+        <button type="button" class="admin-logout-btn" onclick="adminLogout()">
+            <i class="fa fa-sign-out"></i>
+            Logout
+        </button>
+    </header>
+    <!-- ==================================================
+     ADMIN HERO
+================================================== -->
+    <section class="admin-hero">
+        <div class="admin-hero-overlay"></div>
+        <div class="admin-hero-content">
+            <span>
+                MANAGE MOSAIC DINE
+            </span>
+            <h1>
+                Admin <strong>Dashboard</strong>
+            </h1>
+            <p>
+                Add delicious dishes, manage your menu and track customer orders.
+            </p>
+        </div>
+    </section>
+    <!-- ==================================================
+     ADD / EDIT MENU
+================================================== -->
+    <section class="admin-section">
+        <div class="section-heading">
+            <span>
+                MENU MANAGEMENT
+            </span>
+            <h2 id="formTitle">
+                Add New Dish
+            </h2>
+            <p id="formDescription">
+                Enter the details below to add a new item to the Mosaic Dine menu.
+            </p>
+        </div>
+        <div class="admin-container">
+            <form id="menuForm" class="admin-form">
+                <!-- DISH NAME -->
+                <div class="admin-input-group">
+                    <label for="dishName">
+                        Dish Name
+                    </label>
+                    <div class="admin-input">
+                        <i class="fa fa-cutlery"></i>
+                        <input type="text" id="dishName" placeholder="Example: Masala Dosa" required>
+                    </div>
+                </div>
+                <!-- DESCRIPTION -->
+                <div class="admin-input-group">
+                    <label for="description">
+                        Description
+                    </label>
+                    <div class="admin-input">
+                        <i class="fa fa-align-left"></i>
+                        <textarea id="description" placeholder="Describe the dish..." required></textarea>
+                    </div>
+                </div>
+                <!-- PRICE -->
+                <div class="admin-input-group">
+                    <label for="price">
+                        Price
+                    </label>
+                    <div class="admin-input">
+                        <i class="fa fa-inr"></i>
+                        <input type="number" id="price" placeholder="Example: 120" min="1" required>
+                    </div>
+                </div>
+                <!-- MEAL -->
+                <div class="admin-input-group">
+                    <label for="meal">
+                        Meal Category
+                    </label>
+                    <div class="admin-input">
+                        <i class="fa fa-list"></i>
+                        <select id="meal" required>
+                            <option value="">
+                                Select meal category
+                            </option>
+                            <option value="Breakfast">
+                                Breakfast
+                            </option>
+                            <option value="Lunch">
+                                Lunch
+                            </option>
+                            <option value="Dinner">
+                                Dinner
+                            </option>
+                            <option value="Snacks & Beverages">
+                                Snacks & Beverages
+                            </option>
+                            <option value="Desserts">
+                                Desserts
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- IMAGE -->
+                <div class="admin-input-group">
+                    <label for="image">
+                        Image URL
+                    </label>
+                    <div class="admin-input">
+                        <i class="fa fa-picture-o"></i>
+                        <input type="text" id="image" placeholder="Example: /assets/masala-dosa.jpg">
+                    </div>
+                </div>
+                <!-- BUTTONS -->
+                <div class="admin-form-buttons">
+                    <button type="submit" class="admin-submit" id="submitButton">
+                        <i class="fa fa-plus"></i>
+                        Add Dish
+                    </button>
+                    <button type="button" class="admin-cancel-btn" id="cancelEditButton" style="display: none;">
+                        <i class="fa fa-times"></i>
+                        Cancel Edit
+                    </button>
+                </div>
+            </form>
+            <!-- STATUS -->
+            <div id="adminMessage" class="admin-message">
+            </div>
+        </div>
+    </section>
+    <!-- ==================================================
+     MANAGE MENU
+================================================== -->
+    <section class="admin-section">
+        <div class="section-heading">
+            <span>
+                MENU MANAGEMENT
+            </span>
+            <h2>
+                Manage Existing Dishes
+            </h2>
+            <p>
+                View, edit and remove dishes from the Mosaic Dine menu.
+            </p>
+        </div>
+        <div class="admin-menu-list" id="adminMenuList">
+            <p class="admin-loading">
+                Loading menu items...
+            </p>
+        </div>
+    </section>
+    <!-- ==================================================
+     ORDER MANAGEMENT
+================================================== -->
+    <section class="admin-section">
+        <div class="section-heading">
+            <span>
+                ORDER MANAGEMENT
+            </span>
+            <h2>
+                Customer Orders
+            </h2>
+            <p>
+                View customer orders and update their delivery status.
+            </p>
+        </div>
+        <div class="admin-container">
+            <div id="adminOrderMessage" class="admin-message">
+            </div>
+            <div id="adminOrderList">
+                <p class="admin-loading">
+                    <i class="fa fa-spinner fa-spin"></i>
+                    Loading customer orders...
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- ==================================================
+     ADMIN INFO
+================================================== -->
+    <section class="admin-info-section">
+        <div class="admin-info">
+            <i class="fa fa-database"></i>
+            <h2>
+                Connected to Menu & Order Database
+            </h2>
+            <p>
+                Menu items and customer orders are securely stored in MongoDB.
+            </p>
+            <a href="Menu.html" class="admin-menu-btn">
+                View Menu
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+    <!-- ==================================================
+     FOOTER
+================================================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>
+                    Mosaic <span>Dine</span>
+                </h2>
+                <p>
+                    Bringing people together through delicious food,
+                    warm hospitality and memorable moments.
+                </p>
+                <div class="social-links">
+                    <a href="#">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-google"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>
+                    Quick Links
+                </h3>
+                <a href="index.html">
+                    Home
+                </a>
+                <a href="About.html">
+                    About
+                </a>
+                <a href="Menu.html">
+                    Menu
+                </a>
+                <a href="Contact.html">
+                    Contact
+                </a>
+            </div>
+            <div class="footer-column">
+                <h3>
+                    Account
+                </h3>
+                <a href="Login.html">
+                    Login
+                </a>
+                <a href="Signup.html">
+                    Sign Up
+                </a>
+            </div>
+            <div class="footer-column">
+                <h3>
+                    Contact
+                </h3>
+                <p>
+                    <i class="fa fa-map-marker"></i>
+                    Sangareddy, Telangana
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i>
+                    +91 9666987128
+                </p>
+                <p>
+                    <i class="fa fa-envelope"></i>
+                    contact@mosaicdine.com
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>
+                &copy; 2025 Mosaic Dine. All Rights Reserved.
+            </p>
+            <p>
+                Designed by
+                <strong>
+                    Jadavath Varthya Ashwini
+                </strong>
+            </p>
+        </div>
+    </footer>
+    <!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+    <script>
+        // ==================================================
+        // THREE DOT MENU
+        // ==================================================
+        const mobileMenuToggle =
+            document.getElementById(
+                "mobileMenuToggle"
+            );
+        const mainNavbar =
+            document.getElementById(
+                "mainNavbar"
+            );
+        if (
+            mobileMenuToggle &&
+            mainNavbar
+        ) {
+            mobileMenuToggle.addEventListener(
+                "click",
+                function (event) {
+                    event.stopPropagation();
+                    const isOpen =
+                        mainNavbar.classList.toggle(
+                            "mobile-menu-open"
+                        );
+                    mobileMenuToggle.setAttribute(
+                        "aria-expanded",
+                        isOpen
+                    );
+                }
+            );
+            const navLinks =
+                mainNavbar.querySelectorAll(
+                    "a"
+                );
+            navLinks.forEach(
+                function (link) {
+                    link.addEventListener(
+                        "click",
+                        function () {
+                            mainNavbar.classList.remove(
+                                "mobile-menu-open"
+                            );
+                            mobileMenuToggle.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+                        }
+                    );
+                }
+            );
+            document.addEventListener(
+                "click",
+                function (event) {
+                    if (
+                        !mainNavbar.contains(
+                            event.target
+                        ) &&
+                        !mobileMenuToggle.contains(
+                            event.target
+                        )
+                    ) {
+                        mainNavbar.classList.remove(
+                            "mobile-menu-open"
+                        );
+                        mobileMenuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+                    }
+                }
+            );
+        }
+        // ==================================================
+        // API URL
+        // ==================================================
+        const API_URL =
+            "http://localhost:3000";
+        // ==================================================
+        // ADMIN PAGE PROTECTION
+        // ==================================================
+        const adminLoggedIn =
+            localStorage.getItem(
+                "adminLoggedIn"
+            );
+        const adminToken =
+            localStorage.getItem(
+                "adminToken"
+            );
+        if (
+            adminLoggedIn !== "true" ||
+            !adminToken
+        ) {
+            window.location.href =
+                "AdminLogin.html";
+        }
+        // ==================================================
+        // ELEMENTS
+        // ==================================================
+        const menuForm =
+            document.getElementById(
+                "menuForm"
+            );
+        const adminMessage =
+            document.getElementById(
+                "adminMessage"
+            );
+        const formTitle =
+            document.getElementById(
+                "formTitle"
+            );
+        const formDescription =
+            document.getElementById(
+                "formDescription"
+            );
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+        const cancelEditButton =
+            document.getElementById(
+                "cancelEditButton"
+            );
+        // ==================================================
+        // EDITING MENU ID
+        // ==================================================
+        let editingMenuId =
+            null;
+        // ==================================================
+        // ADMIN LOGOUT
+        // ==================================================
+        function adminLogout() {
+            localStorage.removeItem(
+                "adminLoggedIn"
+            );
+            localStorage.removeItem(
+                "adminUser"
+            );
+            localStorage.removeItem(
+                "adminToken"
+            );
+            window.location.href =
+                "AdminLogin.html";
+        }
+        // ==================================================
+        // ADD / UPDATE MENU ITEM
+        // ==================================================
+        menuForm.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+                const name =
+                    document
+                        .getElementById(
+                            "dishName"
+                        )
+                        .value
+                        .trim();
+                const description =
+                    document
+                        .getElementById(
+                            "description"
+                        )
+                        .value
+                        .trim();
+                const price =
+                    Number(
+                        document
+                            .getElementById(
+                                "price"
+                            )
+                            .value
+                    );
+                const meal =
+                    document
+                        .getElementById(
+                            "meal"
+                        )
+                        .value;
+                const image =
+                    document
+                        .getElementById(
+                            "image"
+                        )
+                        .value
+                        .trim();
+                // ==================================================
+                // VALIDATION
+                // ==================================================
+                if (
+                    !name ||
+                    !description ||
+                    !price ||
+                    !meal
+                ) {
+                    adminMessage.innerHTML = `
+                <div class="error-message">
+                    <i class="fa fa-exclamation-circle"></i>
+                    Please fill all required fields.
+                </div>
+            `;
+                    return;
+                }
+                submitButton.disabled =
+                    true;
+                try {
+                    let response;
+                    let result;
+                    // ==================================================
+                    // UPDATE MENU ITEM
+                    // ==================================================
+                    if (editingMenuId) {
+                        response =
+                            await fetch(
+                                `${API_URL}/api/menu/${editingMenuId}`,
+                                {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json",
+                                        "Authorization":
+                                            `Bearer ${adminToken}`
+                                    },
+                                    body:
+                                        JSON.stringify({
+                                            name:
+                                                name,
+                                            description:
+                                                description,
+                                            price:
+                                                price,
+                                            meal:
+                                                meal,
+                                            image:
+                                                image
+                                        })
+                                }
+                            );
+                        result =
+                            await response.json();
+                        if (
+                            response.ok &&
+                            result.success
+                        ) {
+                            adminMessage.innerHTML = `
+                        <div class="success-message">
+                            <i class="fa fa-check-circle"></i>
+                            <strong>
+                                Dish Updated Successfully!
+                            </strong>
+                            <p>
+                                ${name}
+                                has been updated successfully.
+                            </p>
+                        </div>
+                    `;
+                            resetEditMode();
+                            loadAdminMenu();
+                        }
+                        else {
+                            adminMessage.innerHTML = `
+                        <div class="error-message">
+                            <i class="fa fa-exclamation-circle"></i>
+                            ${result.message ||
+                                "Unable to update dish."
+                                }
+                        </div>
+                    `;
+                        }
+                    }
+                    // ==================================================
+                    // ADD NEW MENU ITEM
+                    // ==================================================
+                    else {
+                        response =
+                            await fetch(
+                                `${API_URL}/api/menu`,
+                                {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json",
+                                        "Authorization":
+                                            `Bearer ${adminToken}`
+                                    },
+                                    body:
+                                        JSON.stringify({
+                                            name:
+                                                name,
+                                            description:
+                                                description,
+                                            price:
+                                                price,
+                                            meal:
+                                                meal,
+                                            image:
+                                                image
+                                        })
+                                }
+                            );
+                        result =
+                            await response.json();
+                        if (
+                            response.ok &&
+                            result.success
+                        ) {
+                            adminMessage.innerHTML = `
+                        <div class="success-message">
+                            <i class="fa fa-check-circle"></i>
+                            <strong>
+                                Dish Added Successfully!
+                            </strong>
+                            <p>
+                                ${name}
+                                has been added to the
+                                ${meal} menu.
+                            </p>
+                        </div>
+                    `;
+                            menuForm.reset();
+                            loadAdminMenu();
+                        }
+                        else {
+                            adminMessage.innerHTML = `
+                        <div class="error-message">
+                            <i class="fa fa-exclamation-circle"></i>
+                            ${result.message ||
+                                "Unable to add dish."
+                                }
+                        </div>
+                    `;
+                        }
+                    }
+                }
+                catch (error) {
+                    console.error(
+                        "Admin Menu Error:",
+                        error
+                    );
+                    adminMessage.innerHTML = `
+                <div class="error-message">
+                    <i class="fa fa-exclamation-circle"></i>
+                    Unable to connect to the server.
+                </div>
+            `;
+                }
+                submitButton.disabled =
+                    false;
+            }
+        );
+        // ==================================================
+        // LOAD MENU ITEMS
+        // ==================================================
+        async function loadAdminMenu() {
+            const menuList =
+                document.getElementById(
+                    "adminMenuList"
+                );
+            try {
+                const response =
+                    await fetch(
+                        `${API_URL}/api/menu`
+                    );
+                const menu =
+                    await response.json();
+                if (!menu.length) {
+                    menuList.innerHTML = `
+                <div class="no-admin-menu">
+                    <i class="fa fa-cutlery"></i>
+                    <h3>
+                        No Menu Items
+                    </h3>
+                    <p>
+                        Add a dish using the form above.
+                    </p>
+                </div>
+            `;
+                    return;
+                }
+                menuList.innerHTML =
+                    menu
+                        .map(
+                            item => `
+                        <div class="admin-menu-item">
+                            <div class="admin-menu-details">
+                                <h3>
+                                    ${item.name}
+                                </h3>
+                                <p>
+                                    ${item.description}
+                                </p>
+                                <span>
+                                    ${item.meal}
+                                    • ₹${item.price}
+                                </span>
+                            </div>
+                            <div class="admin-menu-actions">
+                                <button
+                                    class="edit-menu-btn"
+                                    onclick="editMenuItem('${item._id}')">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit
+                                </button>
+                                <button
+                                    class="delete-menu-btn"
+                                    onclick="deleteMenuItem(
+                                        '${item._id}',
+                                        '${item.name.replace(/'/g, "\\'")}'
+                                    )">
+                                    <i class="fa fa-trash"></i>
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    `
+                        )
+                        .join("");
+            }
+            catch (error) {
+                console.error(
+                    "Admin Menu Load Error:",
+                    error
+                );
+                menuList.innerHTML = `
+            <div class="error-message">
+                Unable to load menu items.
+            </div>
+        `;
+            }
+        }
+        // ==================================================
+        // EDIT MENU ITEM
+        // ==================================================
+        async function editMenuItem(id) {
+            try {
+                const response =
+                    await fetch(
+                        `${API_URL}/api/menu`
+                    );
+                const menu =
+                    await response.json();
+                const item =
+                    menu.find(
+                        menuItem =>
+                            menuItem._id === id
+                    );
+                if (!item) {
+                    alert(
+                        "Menu item not found."
+                    );
+                    return;
+                }
+                document
+                    .getElementById(
+                        "dishName"
+                    )
+                    .value =
+                    item.name;
+                document
+                    .getElementById(
+                        "description"
+                    )
+                    .value =
+                    item.description;
+                document
+                    .getElementById(
+                        "price"
+                    )
+                    .value =
+                    item.price;
+                document
+                    .getElementById(
+                        "meal"
+                    )
+                    .value =
+                    item.meal;
+                document
+                    .getElementById(
+                        "image"
+                    )
+                    .value =
+                    item.image || "";
+                editingMenuId =
+                    id;
+                formTitle.textContent =
+                    "Edit Dish";
+                formDescription.textContent =
+                    "Update the details below and save your changes.";
+                submitButton.innerHTML = `
+            <i class="fa fa-save"></i>
+            Save Changes
+        `;
+                cancelEditButton.style.display =
+                    "block";
+                window.scrollTo({
+                    top:
+                        document
+                            .querySelector(
+                                ".admin-section"
+                            )
+                            .offsetTop - 30,
+                    behavior:
+                        "smooth"
+                });
+            }
+            catch (error) {
+                console.error(
+                    "Edit Menu Error:",
+                    error
+                );
+                alert(
+                    "Unable to load menu item."
+                );
+            }
+        }
+        // ==================================================
+        // CANCEL EDIT
+        // ==================================================
+        cancelEditButton.addEventListener(
+            "click",
+            function () {
+                resetEditMode();
+            }
+        );
+        function resetEditMode() {
+            editingMenuId =
+                null;
+            menuForm.reset();
+            formTitle.textContent =
+                "Add New Dish";
+            formDescription.textContent =
+                "Enter the details below to add a new item to the Mosaic Dine menu.";
+            submitButton.innerHTML = `
+        <i class="fa fa-plus"></i>
+        Add Dish
+    `;
+            submitButton.disabled =
+                false;
+            cancelEditButton.style.display =
+                "none";
+        }
+        // ==================================================
+        // DELETE MENU ITEM
+        // ==================================================
+        async function deleteMenuItem(
+            id,
+            name
+        ) {
+            const confirmDelete =
+                confirm(
+                    `Are you sure you want to delete "${name}"?`
+                );
+            if (!confirmDelete) {
+                return;
+            }
+            try {
+                const response =
+                    await fetch(
+                        `${API_URL}/api/menu/${id}`,
+                        {
+                            method: "DELETE",
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${adminToken}`
+                            }
+                        }
+                    );
+                const result =
+                    await response.json();
+                if (
+                    response.ok &&
+                    result.success
+                ) {
+                    alert(
+                        `"${name}" has been deleted successfully.`
+                    );
+                    loadAdminMenu();
+                }
+                else {
+                    alert(
+                        result.message ||
+                        "Unable to delete menu item."
+                    );
+                }
+            }
+            catch (error) {
+                console.error(
+                    "Delete Error:",
+                    error
+                );
+                alert(
+                    "Unable to connect to the server."
+                );
+            }
+        }
+        // ==================================================
+        // LOAD ALL CUSTOMER ORDERS
+        // ==================================================
+        async function loadAdminOrders() {
+            const orderList =
+                document.getElementById(
+                    "adminOrderList"
+                );
+            orderList.innerHTML = `
+        <p class="admin-loading">
+            <i class="fa fa-spinner fa-spin"></i>
+            Loading customer orders...
+        </p>
+    `;
+            try {
+                const response =
+                    await fetch(
+                        `${API_URL}/api/orders`,
+                        {
+                            method: "GET",
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${adminToken}`
+                            }
+                        }
+                    );
+                const result =
+                    await response.json();
+                console.log(
+                    "Admin Orders Response:",
+                    result
+                );
+                // ==================================================
+                // AUTH ERROR
+                // ==================================================
+                if (
+                    response.status === 401 ||
+                    response.status === 403
+                ) {
+                    alert(
+                        "Admin session expired. Please login again."
+                    );
+                    adminLogout();
+                    return;
+                }
+                if (
+                    !response.ok ||
+                    !result.success
+                ) {
+                    orderList.innerHTML = `
+                <div class="error-message">
+                    ${result.message ||
+                        "Unable to load customer orders."
+                        }
+                </div>
+            `;
+                    return;
+                }
+                const orders =
+                    result.orders || [];
+                // ==================================================
+                // NO ORDERS
+                // ==================================================
+                if (!orders.length) {
+                    orderList.innerHTML = `
+                <div class="no-admin-menu">
+                    <i class="fa fa-shopping-bag"></i>
+                    <h3>
+                        No Customer Orders
+                    </h3>
+                    <p>
+                        Customer orders will appear here after they place an order.
+                    </p>
+                </div>
+            `;
+                    return;
+                }
+                // ==================================================
+                // ORDER COUNT
+                // ==================================================
+                const orderCountHTML = `
+            <p class="admin-loading">
+                Total Orders:
+                <strong>
+                    ${orders.length}
+                </strong>
+            </p>
+        `;
+                // ==================================================
+                // CREATE ORDER CARDS
+                // ==================================================
+                orderList.innerHTML =
+                    orderCountHTML +
+                    orders
+                        .map(
+                            function (order) {
+                                return createAdminOrderCard(
+                                    order
+                                );
+                            }
+                        )
+                        .join("");
+            }
+            catch (error) {
+                console.error(
+                    "Admin Orders Error:",
+                    error
+                );
+                orderList.innerHTML = `
+            <div class="error-message">
+                Unable to connect to the server.
+            </div>
+        `;
+            }
+        }
+        // ==================================================
+        // CREATE ADMIN ORDER CARD
+        // ==================================================
+        function createAdminOrderCard(
+            order
+        ) {
+            const orderDate =
+                order.orderDate
+                    ? new Date(
+                        order.orderDate
+                    ).toLocaleString(
+                        "en-IN",
+                        {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        }
+                    )
+                    : "N/A";
+            const status =
+                order.status ||
+                "Placed";
+            // ==================================================
+            // ORDER ITEMS
+            // ==================================================
+            let itemsHTML =
+                "";
+            if (
+                Array.isArray(
+                    order.items
+                ) &&
+                order.items.length
+            ) {
+                itemsHTML =
+                    order.items
+                        .map(
+                            function (item) {
+                                const itemName =
+                                    item.name ||
+                                    item.title ||
+                                    "Item";
+                                const quantity =
+                                    item.quantity ||
+                                    item.qty ||
+                                    1;
+                                const itemPrice =
+                                    Number(
+                                        item.price ||
+                                        0
+                                    );
+                                const itemTotal =
+                                    itemPrice *
+                                    quantity;
+                                return `
+                            <div class="admin-menu-item">
+                                <div class="admin-menu-details">
+                                    <h3>
+                                        ${itemName}
+                                    </h3>
+                                    <p>
+                                        Quantity:
+                                        ${quantity}
+                                    </p>
+                                </div>
+                                <div>
+                                    ₹${itemTotal.toFixed(2)}
+                                </div>
+                            </div>
+                        `;
+                            }
+                        )
+                        .join("");
+            }
+            else {
+                itemsHTML = `
+            <p>
+                No item details available.
+            </p>
+        `;
+            }
+            // ==================================================
+            // ORDER CARD
+            // ==================================================
+            return `
+        <div class="admin-menu-item">
+            <div class="admin-menu-details">
+                <h3>
+                    <i class="fa fa-shopping-bag"></i>
+                    Order ID:
+                    ${order.orderId}
+                </h3>
+                <p>
+                    <strong>
+                        Customer:
+                    </strong>
+                    ${order.customerName}
+                </p>
+                <p>
+                    <strong>
+                        Email:
+                    </strong>
+                    ${order.customerEmail}
+                </p>
+                <p>
+                    <strong>
+                        Phone:
+                    </strong>
+                    ${order.customerPhone}
+                </p>
+                <p>
+                    <strong>
+                        Address:
+                    </strong>
+                    ${order.address},
+                    ${order.city} -
+                    ${order.pincode}
+                </p>
+                <p>
+                    <strong>
+                        Payment:
+                    </strong>
+                    ${order.paymentMethod}
+                </p>
+                <p>
+                    <strong>
+                        Order Date:
+                    </strong>
+                    ${orderDate}
+                </p>
+                <br>
+                <strong>
+                    Ordered Items:
+                </strong>
+                ${itemsHTML}
+                <p>
+                    <strong>
+                        Order Total:
+                    </strong>
+                    ₹${Number(
+                order.total || 0
+            ).toFixed(2)}
+                </p>
+                <p>
+                    <strong>
+                        Current Status:
+                    </strong>
+                    ${status}
+                </p>
+                <!-- ==========================================
+                     ORDER STATUS DROPDOWN
+                =========================================== -->
+                <div class="order-status-control">
+                    <label
+                        for="status-${order._id}">
+                        <i class="fa fa-truck"></i>
+                        Update Order Status
+                    </label>
+                    <select
+                        id="status-${order._id}"
+                        class="order-status-select"
+                        aria-label="Update order status">
+                        <option
+                            value="Placed"
+                            ${status === "Placed" ? "selected" : ""}>
+                            Placed
+                        </option>
+                        <option
+                            value="Confirmed"
+                            ${status === "Confirmed" ? "selected" : ""}>
+                            Confirmed
+                        </option>
+                        <option
+                            value="Preparing"
+                            ${status === "Preparing" ? "selected" : ""}>
+                            Preparing
+                        </option>
+                        <option
+                            value="Out for Delivery"
+                            ${status === "Out for Delivery" ? "selected" : ""}>
+                            Out for Delivery
+                        </option>
+                        <option
+                            value="Delivered"
+                            ${status === "Delivered" ? "selected" : ""}>
+                            Delivered
+                        </option>
+                        <option
+                            value="Cancelled"
+                            ${status === "Cancelled" ? "selected" : ""}>
+                            Cancelled
+                        </option>
+                    </select>
+                    <button
+                        type="button"
+                        class="admin-submit update-status-btn"
+                        onclick="updateOrderStatus('${order._id}')">
+                        <i class="fa fa-save"></i>
+                        Update Status
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+        }
+        // ==================================================
+        // UPDATE ORDER STATUS
+        // ==================================================
+        async function updateOrderStatus(
+            orderId
+        ) {
+            const select =
+                document.getElementById(
+                    `status-${orderId}`
+                );
+            if (!select) {
+                return;
+            }
+            const newStatus =
+                select.value;
+            try {
+                console.log(
+                    "Updating order status:",
+                    orderId,
+                    "→",
+                    newStatus
+                );
+                const response =
+                    await fetch(
+                        `${API_URL}/api/orders/${orderId}/status`,
+                        {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+                                "Authorization":
+                                    `Bearer ${adminToken}`
+                            },
+                            body:
+                                JSON.stringify({
+                                    status:
+                                        newStatus
+                                })
+                        }
+                    );
+                const result =
+                    await response.json();
+                console.log(
+                    "Status update response:",
+                    result
+                );
+                // ==================================================
+                // AUTH ERROR
+                // ==================================================
+                if (
+                    response.status === 401 ||
+                    response.status === 403
+                ) {
+                    alert(
+                        "Admin session expired. Please login again."
+                    );
+                    adminLogout();
+                    return;
+                }
+                // ==================================================
+                // SUCCESS
+                // ==================================================
+                if (
+                    response.ok &&
+                    result.success
+                ) {
+                    const message =
+                        document.getElementById(
+                            "adminOrderMessage"
+                        );
+                    message.innerHTML = `
+                <div class="success-message">
+                    <i class="fa fa-check-circle"></i>
+                    Order
+                    <strong>
+                        ${result.order.orderId}
+                    </strong>
+                    status updated to
+                    <strong>
+                        ${result.order.status}
+                    </strong>.
+                </div>
+            `;
+                    loadAdminOrders();
+                }
+                else {
+                    alert(
+                        result.message ||
+                        "Unable to update order status."
+                    );
+                }
+            }
+            catch (error) {
+                console.error(
+                    "Update Order Status Error:",
+                    error
+                );
+                alert(
+                    "Unable to connect to the server."
+                );
+            }
+        }
+        // ==================================================
+        // LOAD MENU AND ORDERS
+        // ==================================================
+        loadAdminMenu();
+        loadAdminOrders();
+    </script>
+</body>
+
+</html>

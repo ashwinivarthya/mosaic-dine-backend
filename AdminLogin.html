@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/png" href="../assets/Dine.png">
+    <title>Admin Login | Mosaic Dine</title>
+    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="login-background"></div>
+        <div class="login-overlay"></div>
+        <div class="login-card">
+            <div class="login-logo">
+                <img src="/assets/Dine.png" alt="Mosaic Dine Logo">
+            </div>
+            <h1>Admin Login</h1>
+            <p class="login-subtitle">
+                Sign in to manage Mosaic Dine
+            </p>
+            <form id="adminLoginForm">
+                <!-- ADMIN EMAIL -->
+                <div class="login-field">
+                    <label for="adminEmail">
+                        <i class="fa fa-envelope"></i>
+                        Admin Email
+                    </label>
+                    <input type="email" id="adminEmail" placeholder="Enter admin email" required>
+                </div>
+                <!-- ADMIN PASSWORD -->
+                <div class="login-field">
+                    <label for="adminPassword">
+                        <i class="fa fa-lock"></i>
+                        Password
+                    </label>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                </div>
+                <!-- MESSAGE -->
+                <div id="adminLoginMessage" class="admin-login-message">
+                </div>
+                <!-- LOGIN BUTTON -->
+                <button type="submit" class="login-btn">
+                    <i class="fa fa-sign-in"></i>
+                    Admin Login
+                </button>
+            </form>
+            <!-- BACK TO HOME -->
+            <div class="admin-login-back">
+                <a href="index.html">
+                    <i class="fa fa-arrow-left"></i>
+                    Back to Mosaic Dine
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const adminLoginForm =
+            document.getElementById("adminLoginForm");
+        const adminLoginMessage =
+            document.getElementById("adminLoginMessage");
+        adminLoginForm.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+                const email =
+                    document
+                        .getElementById("adminEmail")
+                        .value
+                        .trim();
+                const password =
+                    document
+                        .getElementById("adminPassword")
+                        .value;
+                adminLoginMessage.innerHTML = "";
+                try {
+                    const response = await fetch(
+                        "http://localhost:3000/admin/login",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+                            body: JSON.stringify({
+                                email: email,
+                                password: password
+                            })
+                        }
+                    );
+                    const result =
+                        await response.json();
+                    /* =========================
+                       SUCCESSFUL ADMIN LOGIN
+                       ========================= */
+                    if (result.success) {
+                        /* SAVE ADMIN LOGIN */
+                        localStorage.setItem(
+                            "adminLoggedIn",
+                            "true"
+                        );
+                        /* SAVE ADMIN DETAILS */
+                        localStorage.setItem(
+                            "adminUser",
+                            JSON.stringify(result.admin)
+                        );
+                        /* SAVE JWT TOKEN */
+                        localStorage.setItem(
+                            "adminToken",
+                            result.token
+                        );
+                        /* SUCCESS MESSAGE */
+                        adminLoginMessage.innerHTML = `
+                            <div class="success-message">
+                                <i class="fa fa-check-circle"></i>
+                                ${result.message}
+                            </div>
+                        `;
+                        /* =========================
+                           GO TO HOME PAGE
+                           ========================= */
+                        setTimeout(function () {
+                            window.location.href =
+                                "Index.html";
+                        }, 700);
+                    } else {
+                        /* REMOVE OLD ADMIN LOGIN */
+                        localStorage.removeItem(
+                            "adminLoggedIn"
+                        );
+                        localStorage.removeItem(
+                            "adminUser"
+                        );
+                        localStorage.removeItem(
+                            "adminToken"
+                        );
+                        /* ERROR MESSAGE */
+                        adminLoginMessage.innerHTML = `
+                            <div class="error-message">
+                                <i class="fa fa-exclamation-circle"></i>
+                                ${result.message}
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error(
+                        "Admin Login Error:",
+                        error
+                    );
+                    adminLoginMessage.innerHTML = `
+                        <div class="error-message">
+                            <i class="fa fa-exclamation-circle"></i>
+                            Unable to connect to server.
+                        </div>
+                    `;
+                }
+            }
+        );
+    </script>
+</body>
+
+</html>

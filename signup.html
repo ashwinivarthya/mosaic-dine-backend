@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/assets/Dine.png">
+    <title>Sign Up | Mosaic Dine</title>
+    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="signup-page">
+        <div class="signup-background"></div>
+        <!-- SIGNUP CARD -->
+        <div class="signup-card">
+            <!-- HEADER -->
+            <div class="signup-header">
+                <a href="index.html">
+                    <img src="/assets/Dine.png" alt="Mosaic Dine Logo">
+                </a>
+                <span>
+                    JOIN MOSAIC DINE
+                </span>
+                <h1>
+                    Create Your <strong>Account</strong>
+                </h1>
+                <p>
+                    Sign up and make every dining experience memorable.
+                </p>
+            </div>
+            <!-- SIGNUP FORM -->
+            <form id="signupForm">
+                <!-- FULL NAME -->
+                <div class="signup-input">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                </div>
+                <!-- EMAIL -->
+                <div class="signup-input">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <!-- PHONE -->
+                <div class="signup-input">
+                    <i class="fa fa-phone"></i>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" maxlength="10" required>
+                </div>
+                <!-- PASSWORD -->
+                <div class="signup-input">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                </div>
+                <!-- CONFIRM PASSWORD -->
+                <div class="signup-input">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <!-- TERMS -->
+                <div class="terms">
+                    <label>
+                        <input type="checkbox" id="terms" required>
+                        <span>
+                            I agree to the
+                            <a href="#">
+                                Terms & Conditions
+                            </a>
+                        </span>
+                    </label>
+                </div>
+                <!-- SIGNUP BUTTON -->
+                <button type="submit" class="signup-submit">
+                    Create Account
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </form>
+            <!-- DIVIDER -->
+            <div class="signup-divider">
+                <span>
+                    or sign up with
+                </span>
+            </div>
+            <!-- SOCIAL SIGNUP -->
+            <div class="signup-social">
+                <!-- GOOGLE -->
+                <button type="button" class="signup-social-btn google">
+                    <i class="fa fa-google"></i>
+                    Google
+                </button>
+                <!-- FACEBOOK -->
+                <button type="button" class="signup-social-btn facebook">
+                    <i class="fa fa-facebook"></i>
+                    Facebook
+                </button>
+                <!-- INSTAGRAM -->
+                <button type="button" class="signup-social-btn instagram">
+                    <i class="fa fa-instagram"></i>
+                    Instagram
+                </button>
+            </div>
+            <!-- LOGIN -->
+            <div class="already-account">
+                <p>
+                    Already have an account?
+                    <a href="Login.html">
+                        Login
+                    </a>
+                </p>
+            </div>
+            <!-- HOME -->
+            <a href="index.html" class="signup-home">
+                <i class="fa fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </div>
+    <!-- JAVASCRIPT -->
+    <script>
+        /* =====================================================
+           SIGNUP FORM
+           ===================================================== */
+        const signupForm =
+            document.getElementById("signupForm");
+        signupForm.addEventListener(
+            "submit",
+            async function (event) {
+                event.preventDefault();
+                /* =================================================
+                   GET FORM VALUES
+                   ================================================= */
+                const name =
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim();
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+                const terms =
+                    document
+                        .getElementById("terms")
+                        .checked;
+                /* =================================================
+                   NAME VALIDATION
+                   ================================================= */
+                if (name === "") {
+                    alert(
+                        "Please enter your full name."
+                    );
+                    return;
+                }
+                /* =================================================
+                   EMAIL VALIDATION
+                   ================================================= */
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert(
+                        "Please enter a valid email address."
+                    );
+                    return;
+                }
+                /* =================================================
+                   PHONE VALIDATION
+                   ================================================= */
+                const phonePattern =
+                    /^[0-9]{10}$/;
+                if (!phonePattern.test(phone)) {
+                    alert(
+                        "Please enter a valid 10-digit phone number."
+                    );
+                    return;
+                }
+                /* =================================================
+                   PASSWORD VALIDATION
+                   ================================================= */
+                if (password.length < 6) {
+                    alert(
+                        "Password must contain at least 6 characters."
+                    );
+                    return;
+                }
+                /* =================================================
+                   CONFIRM PASSWORD
+                   ================================================= */
+                if (password !== confirmPassword) {
+                    alert(
+                        "Passwords do not match."
+                    );
+                    return;
+                }
+                /* =================================================
+                   TERMS
+                   ================================================= */
+                if (!terms) {
+                    alert(
+                        "Please agree to the Terms & Conditions."
+                    );
+                    return;
+                }
+                /* =================================================
+                   SEND DATA TO BACKEND
+                   ================================================= */
+                try {
+                    const response =
+                        await fetch(
+                            "http://localhost:3000/signup",
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+                                body: JSON.stringify({
+                                    name: name,
+                                    email: email,
+                                    phone: phone,
+                                    password: password
+                                })
+                            }
+                        );
+                    const result =
+                        await response.json();
+                    /* =================================================
+                       BACKEND SUCCESS
+                       ================================================= */
+                    if (result.success) {
+                        alert(
+                            "Welcome to Mosaic Dine, " +
+                            name +
+                            "!\n\n" +
+                            "Your account has been created successfully."
+                        );
+                        window.location.href =
+                            "Login.html";
+                    }
+                    /* =================================================
+                       BACKEND ERROR
+                       ================================================= */
+                    else {
+                        alert(
+                            result.message
+                        );
+                    }
+                }
+                catch (error) {
+                    console.error(
+                        "Signup Error:",
+                        error
+                    );
+                    alert(
+                        "Unable to connect to the server.\n\n" +
+                        "Please make sure the backend server is running."
+                    );
+                }
+            }
+        );
+        /* =====================================================
+           GOOGLE SIGNUP
+           ===================================================== */
+        document
+            .querySelector(".google")
+            .addEventListener(
+                "click",
+                function () {
+                    alert(
+                        "Google Sign Up Coming Soon!"
+                    );
+                }
+            );
+        /* =====================================================
+           FACEBOOK SIGNUP
+           ===================================================== */
+        document
+            .querySelector(".facebook")
+            .addEventListener(
+                "click",
+                function () {
+                    alert(
+                        "Facebook Sign Up Coming Soon!"
+                    );
+                }
+            );
+        /* =====================================================
+           INSTAGRAM SIGNUP
+           ===================================================== */
+        document
+            .querySelector(".instagram")
+            .addEventListener(
+                "click",
+                function () {
+                    alert(
+                        "Instagram Sign Up Coming Soon!"
+                    );
+                }
+            );
+    </script>
+</body>
+
+</html>

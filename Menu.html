@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/assets/Dine.png">
+    <title>Menu | Mosaic Dine</title>
+    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- ====================== -->
+    <!-- HEADER -->
+    <!-- ====================== -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="/assets/Dine.png" alt="Mosaic Dine Logo">
+            </a>
+            <span>
+                Mosaic <strong>Dine</strong>
+            </span>
+        </div>
+        <!-- MOBILE MENU BUTTON -->
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu"
+            aria-expanded="false">
+            <i class="fa fa-ellipsis-v"></i>
+        </button>
+        <nav class="navbar" id="mainNavbar">
+            <a href="index.html">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+            <a href="About.html">
+                <i class="fa fa-info-circle"></i>
+                About
+            </a>
+            <a href="Menu.html" class="active">
+                <i class="fa fa-cutlery"></i>
+                Menu
+            </a>
+            <a href="Contact.html">
+                <i class="fa fa-envelope"></i>
+                Contact
+            </a>
+            <!-- CART -->
+            <a href="Cart.html" class="cart-link">
+                <span class="cart-icon">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span id="cartCount" class="cart-badge">
+                    </span>
+                </span>
+                Cart
+            </a>
+        </nav>
+    </header>
+    <!-- ====================== -->
+    <!-- MENU HERO -->
+    <!-- ====================== -->
+    <section class="menu-hero">
+        <div class="menu-hero-overlay"></div>
+        <div class="menu-hero-content">
+            <span>
+                EXPLORE OUR MENU
+            </span>
+            <h1>
+                Good Food.<br>
+                <strong>Great Moments.</strong>
+            </h1>
+            <p>
+                Discover delicious flavors prepared with fresh ingredients
+                and served with love.
+            </p>
+        </div>
+    </section>
+    <!-- ====================== -->
+    <!-- MENU SECTION -->
+    <!-- ====================== -->
+    <section class="menu-page">
+        <div class="section-heading">
+            <span>
+                WHAT'S COOKING
+            </span>
+            <h2>
+                Our Menu
+            </h2>
+            <p>
+                From comforting breakfast favorites to satisfying dinners
+                and refreshing beverages, there is something for everyone.
+            </p>
+        </div>
+        <!-- ====================== -->
+        <!-- MENU FILTER -->
+        <!-- ====================== -->
+        <div class="menu-filters">
+            <a href="Menu.html" data-meal="all">
+                All
+            </a>
+            <a href="Menu.html?meal=breakfast" data-meal="breakfast">
+                Breakfast
+            </a>
+            <a href="Menu.html?meal=lunch" data-meal="lunch">
+                Lunch
+            </a>
+            <a href="Menu.html?meal=dinner" data-meal="dinner">
+                Dinner
+            </a>
+            <a href="Menu.html?meal=snacks" data-meal="snacks">
+                Snacks &amp; Beverages
+            </a>
+            <a href="Menu.html?meal=desserts" data-meal="desserts">
+                Desserts
+            </a>
+        </div>
+        <!-- ====================== -->
+        <!-- DYNAMIC MENU -->
+        <!-- ====================== -->
+        <div id="menuContainer"></div>
+    </section>
+    <!-- ====================== -->
+    <!-- MENU CTA -->
+    <!-- ====================== -->
+    <section class="menu-cta">
+        <div>
+            <span>
+                GOOD FOOD IS ALWAYS A GOOD IDEA
+            </span>
+            <h2>
+                Hungry Yet?
+            </h2>
+            <p>
+                Choose your favorite dishes and enjoy a delicious
+                experience at Mosaic Dine.
+            </p>
+            <a href="Contact.html" class="menu-cta-btn">
+                Visit Us
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+    <!-- ====================== -->
+    <!-- FOOTER -->
+    <!-- ====================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- FOOTER BRAND -->
+            <div class="footer-brand">
+                <h2>
+                    Mosaic <span>Dine</span>
+                </h2>
+                <p>
+                    Bringing people together through delicious food,
+                    warm hospitality and memorable moments.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook" onclick="return false;">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#" aria-label="Twitter" onclick="return false;">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram" onclick="return false;">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Google" onclick="return false;">
+                        <i class="fa fa-google"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" onclick="return false;">
+                        <i class="fa fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- QUICK LINKS -->
+            <div class="footer-column">
+                <h3>
+                    Quick Links
+                </h3>
+                <a href="index.html">
+                    Home
+                </a>
+                <a href="About.html">
+                    About
+                </a>
+                <a href="Menu.html">
+                    Menu
+                </a>
+                <a href="Contact.html">
+                    Contact
+                </a>
+            </div>
+            <!-- ACCOUNT -->
+            <div class="footer-column">
+                <h3>
+                    Account
+                </h3>
+                <a href="Login.html">
+                    Login
+                </a>
+                <a href="Signup.html">
+                    Sign Up
+                </a>
+                <a href="MyOrders.html">
+                    My Orders
+                </a>
+            </div>
+            <!-- CONTACT -->
+            <div class="footer-column">
+                <h3>
+                    Contact
+                </h3>
+                <p>
+                    <i class="fa fa-map-marker"></i>
+                    Sangareddy, Telangana
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i>
+                    +91 9666987128
+                </p>
+                <p>
+                    <i class="fa fa-envelope"></i>
+                    contact@mosaicdine.com
+                </p>
+            </div>
+        </div>
+        <!-- FOOTER BOTTOM -->
+        <div class="footer-bottom">
+            <p>
+                &copy; 2026 Mosaic Dine. All Rights Reserved.
+            </p>
+            <p>
+                Designed by
+                <strong>
+                    Jadavath Varthya Ashwini
+                </strong>
+            </p>
+        </div>
+    </footer>
+    <!-- ====================== -->
+    <!-- MENU JAVASCRIPT -->
+    <!-- ====================== -->
+    <script>
+        // ======================
+        // MOBILE NAVIGATION
+        // ======================
+        const mobileMenuToggle =
+            document.getElementById(
+                "mobileMenuToggle"
+            );
+        const mainNavbar =
+            document.getElementById(
+                "mainNavbar"
+            );
+        if (
+            mobileMenuToggle &&
+            mainNavbar
+        ) {
+            mobileMenuToggle.addEventListener(
+                "click",
+                function (event) {
+                    event.stopPropagation();
+                    const isOpen =
+                        mainNavbar.classList.toggle(
+                            "mobile-menu-open"
+                        );
+                    mobileMenuToggle.setAttribute(
+                        "aria-expanded",
+                        isOpen
+                    );
+                }
+            );
+            const navLinks =
+                mainNavbar.querySelectorAll("a");
+            navLinks.forEach(
+                function (link) {
+                    link.addEventListener(
+                        "click",
+                        function () {
+                            mainNavbar.classList.remove(
+                                "mobile-menu-open"
+                            );
+                            mobileMenuToggle.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+                        }
+                    );
+                }
+            );
+            document.addEventListener(
+                "click",
+                function (event) {
+                    if (
+                        !mainNavbar.contains(
+                            event.target
+                        ) &&
+                        !mobileMenuToggle.contains(
+                            event.target
+                        )
+                    ) {
+                        mainNavbar.classList.remove(
+                            "mobile-menu-open"
+                        );
+                        mobileMenuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+                    }
+                }
+            );
+        }
+        // ======================
+        // CUSTOMER / ADMIN NAV
+        // ======================
+        function updateNavigation() {
+            const loggedInUser =
+                JSON.parse(
+                    localStorage.getItem(
+                        "mosaicDineUser"
+                    ) ||
+                    localStorage.getItem(
+                        "loggedInUser"
+                    ) ||
+                    "null"
+                );
+            const adminLoggedIn =
+                localStorage.getItem(
+                    "adminLoggedIn"
+                ) === "true";
+            const loginNavLink =
+                document.getElementById(
+                    "loginNavLink"
+                );
+            const signupNavLink =
+                document.getElementById(
+                    "signupNavLink"
+                );
+            const myOrdersNavLink =
+                document.getElementById(
+                    "myOrdersNavLink"
+                );
+            const adminNavLink =
+                document.getElementById(
+                    "adminNavLink"
+                );
+            const logoutNavLink =
+                document.getElementById(
+                    "logoutNavLink"
+                );
+            if (adminLoggedIn) {
+                if (loginNavLink) {
+                    loginNavLink.style.display = "none";
+                }
+                if (signupNavLink) {
+                    signupNavLink.style.display = "none";
+                }
+                if (myOrdersNavLink) {
+                    myOrdersNavLink.style.display = "none";
+                }
+                if (adminNavLink) {
+                    adminNavLink.style.display = "block";
+                }
+                if (logoutNavLink) {
+                    logoutNavLink.style.display = "block";
+                }
+                return;
+            }
+            if (loggedInUser) {
+                if (loginNavLink) {
+                    loginNavLink.style.display = "none";
+                }
+                if (signupNavLink) {
+                    signupNavLink.style.display = "none";
+                }
+                if (myOrdersNavLink) {
+                    myOrdersNavLink.style.display = "block";
+                }
+                if (adminNavLink) {
+                    adminNavLink.style.display = "none";
+                }
+                if (logoutNavLink) {
+                    logoutNavLink.style.display = "block";
+                }
+                return;
+            }
+            if (loginNavLink) {
+                loginNavLink.style.display = "block";
+            }
+            if (signupNavLink) {
+                signupNavLink.style.display = "block";
+            }
+            if (myOrdersNavLink) {
+                myOrdersNavLink.style.display = "none";
+            }
+            if (adminNavLink) {
+                adminNavLink.style.display = "none";
+            }
+            if (logoutNavLink) {
+                logoutNavLink.style.display = "none";
+            }
+        }
+        // ======================
+        // LOGOUT
+        // ======================
+        function logoutUser() {
+            localStorage.removeItem(
+                "loggedInUser"
+            );
+            localStorage.removeItem(
+                "mosaicDineUser"
+            );
+            localStorage.removeItem(
+                "adminLoggedIn"
+            );
+            localStorage.removeItem(
+                "adminUser"
+            );
+            localStorage.removeItem(
+                "adminToken"
+            );
+            alert(
+                "You have been logged out successfully."
+            );
+            window.location.href =
+                "Index.html";
+        }
+        // ======================
+        // GET CART
+        // ======================
+        function getCart() {
+            return JSON.parse(
+                localStorage.getItem("mosaicDineCart")
+            ) || [];
+        }
+        // ======================
+        // SAVE CART
+        // ======================
+        function saveCart(cart) {
+            localStorage.setItem(
+                "mosaicDineCart",
+                JSON.stringify(cart)
+            );
+        }
+        // ======================
+        // CART BADGE
+        // ======================
+        function updateCartNavbar() {
+            const cartCount =
+                document.getElementById(
+                    "cartCount"
+                );
+            if (!cartCount) {
+                return;
+            }
+            const cart =
+                getCart();
+            const totalQuantity =
+                cart.reduce(
+                    function (total, item) {
+                        return total +
+                            Number(
+                                item.quantity || 0
+                            );
+                    },
+                    0
+                );
+            if (totalQuantity > 0) {
+                cartCount.textContent =
+                    totalQuantity;
+                cartCount.style.display =
+                    "flex";
+            } else {
+                cartCount.textContent =
+                    "";
+                cartCount.style.display =
+                    "none";
+            }
+        }
+        // ======================
+        // INCREASE QUANTITY
+        // ======================
+        function increaseQuantity(itemId) {
+            const card =
+                document.querySelector(
+                    `[data-item-id="${itemId}"]`
+                );
+            if (!card) {
+                return;
+            }
+            const name =
+                card.querySelector("h3")
+                    .textContent
+                    .trim();
+            const descriptionElement =
+                card.querySelector(
+                    ".menu-item-description"
+                );
+            const description =
+                descriptionElement
+                    ? descriptionElement.textContent.trim()
+                    : "";
+            const priceText =
+                card.querySelector(
+                    ".menu-item-price"
+                )
+                    .textContent
+                    .replace("₹", "")
+                    .trim();
+            const price =
+                Number(priceText);
+            const image =
+                card.querySelector(
+                    ".menu-item-image img"
+                )?.getAttribute("src")
+                || "/assets/Dine.png";
+            let cart =
+                getCart();
+            const existingItem =
+                cart.find(
+                    item => item.id === itemId
+                );
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id: itemId,
+                    name: name,
+                    description: description,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            saveCart(cart);
+            updateQuantityControl(itemId);
+            updateCartNavbar();
+        }
+        // ======================
+        // DECREASE QUANTITY
+        // ======================
+        function decreaseQuantity(itemId) {
+            let cart =
+                getCart();
+            const existingItem =
+                cart.find(
+                    item => item.id === itemId
+                );
+            if (!existingItem) {
+                return;
+            }
+            if (
+                Number(existingItem.quantity) > 1
+            ) {
+                existingItem.quantity--;
+            } else {
+                cart =
+                    cart.filter(
+                        item => item.id !== itemId
+                    );
+            }
+            saveCart(cart);
+            updateQuantityControl(itemId);
+            updateCartNavbar();
+        }
+        // ======================
+        // UPDATE QUANTITY CONTROL
+        // ======================
+        function updateQuantityControl(itemId) {
+            const control =
+                document.getElementById(
+                    `quantity-${itemId}`
+                );
+            if (!control) {
+                return;
+            }
+            const cart =
+                getCart();
+            const item =
+                cart.find(
+                    item => item.id === itemId
+                );
+            const quantity =
+                item
+                    ? Number(item.quantity)
+                    : 0;
+            if (quantity === 0) {
+                control.innerHTML = `
+                    <button
+                        type="button"
+                        class="quantity-btn add-btn"
+                        onclick="increaseQuantity('${itemId}')"
+                    >
+                        <i class="fa fa-plus"></i>
+                    </button>
+                `;
+                return;
+            }
+            control.innerHTML = `
+                <button
+                    type="button"
+                    class="quantity-btn"
+                    onclick="decreaseQuantity('${itemId}')"
+                >
+                    <i class="fa fa-minus"></i>
+                </button>
+                <span class="quantity-number">
+                    ${quantity}
+                </span>
+                <button
+                    type="button"
+                    class="quantity-btn"
+                    onclick="increaseQuantity('${itemId}')"
+                >
+                    <i class="fa fa-plus"></i>
+                </button>
+            `;
+        }
+        // ======================
+        // UPDATE ALL QUANTITY CONTROLS
+        // ======================
+        function updateAllQuantityControls() {
+            const cart =
+                getCart();
+            document
+                .querySelectorAll(
+                    ".menu-item-card"
+                )
+                .forEach(
+                    function (card) {
+                        const itemId =
+                            card.getAttribute(
+                                "data-item-id"
+                            );
+                        const control =
+                            document.getElementById(
+                                `quantity-${itemId}`
+                            );
+                        if (!control) {
+                            return;
+                        }
+                        const item =
+                            cart.find(
+                                cartItem =>
+                                    cartItem.id === itemId
+                            );
+                        const quantity =
+                            item
+                                ? Number(item.quantity)
+                                : 0;
+                        if (quantity === 0) {
+                            control.innerHTML = `
+                                <button
+                                    type="button"
+                                    class="quantity-btn add-btn"
+                                    onclick="increaseQuantity('${itemId}')"
+                                >
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            `;
+                        } else {
+                            control.innerHTML = `
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                    onclick="decreaseQuantity('${itemId}')"
+                                >
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <span class="quantity-number">
+                                    ${quantity}
+                                </span>
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                    onclick="increaseQuantity('${itemId}')"
+                                >
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            `;
+                        }
+                    }
+                );
+        }
+        // ======================
+        // SET ACTIVE FILTER
+        // ======================
+        function setActiveFilter(mealFilter) {
+            const filters =
+                document.querySelectorAll(
+                    ".menu-filters a"
+                );
+            filters.forEach(
+                function (filter) {
+                    filter.classList.remove(
+                        "active"
+                    );
+                }
+            );
+            let activeFilter;
+            if (!mealFilter) {
+                activeFilter =
+                    document.querySelector(
+                        '.menu-filters a[data-meal="all"]'
+                    );
+            } else {
+                activeFilter =
+                    document.querySelector(
+                        `.menu-filters a[data-meal="${mealFilter}"]`
+                    );
+            }
+            if (activeFilter) {
+                activeFilter.classList.add(
+                    "active"
+                );
+            }
+        }
+        // ======================
+        // SCROLL TO SELECTED CATEGORY
+        // ======================
+        function scrollToSelectedMeal(
+            mealFilter
+        ) {
+            if (!mealFilter) {
+                return;
+            }
+            const section =
+                document.getElementById(
+                    `menu-section-${mealFilter}`
+                );
+            if (!section) {
+                return;
+            }
+            setTimeout(
+                function () {
+                    const header =
+                        document.querySelector(
+                            ".header"
+                        );
+                    const headerHeight =
+                        header
+                            ? header.offsetHeight
+                            : 0;
+                    const sectionPosition =
+                        section.getBoundingClientRect().top +
+                        window.pageYOffset -
+                        headerHeight -
+                        20;
+                    window.scrollTo({
+                        top: sectionPosition,
+                        behavior: "smooth"
+                    });
+                },
+                200
+            );
+        }
+        // ======================
+        // LOAD MENU
+        // ======================
+        async function loadMenu() {
+            try {
+                const response =
+                    await fetch(
+                        "http://localhost:3000/api/menu"
+                    );
+                if (!response.ok) {
+                    throw new Error(
+                        "Failed to fetch menu"
+                    );
+                }
+                const menu =
+                    await response.json();
+                // ======================
+                // GET URL PARAMETERS
+                // ======================
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+                const dish =
+                    (
+                        params.get("dish") || ""
+                    )
+                        .toLowerCase()
+                        .trim();
+                let mealFilter =
+                    (
+                        params.get("meal") || ""
+                    )
+                        .toLowerCase()
+                        .trim();
+                // ======================
+                // VALID MEAL FILTERS
+                // ======================
+                const validMealFilters = [
+                    "breakfast",
+                    "lunch",
+                    "dinner",
+                    "snacks",
+                    "desserts"
+                ];
+                if (
+                    mealFilter &&
+                    !validMealFilters.includes(
+                        mealFilter
+                    )
+                ) {
+                    mealFilter = "";
+                }
+                // ======================
+                // SET ACTIVE FILTER
+                // ======================
+                setActiveFilter(
+                    mealFilter
+                );
+                // ======================
+                // MENU CATEGORIES
+                // ======================
+                const meals = [
+                    {
+                        name: "Breakfast",
+                        key: "breakfast"
+                    },
+                    {
+                        name: "Lunch",
+                        key: "lunch"
+                    },
+                    {
+                        name: "Dinner",
+                        key: "dinner"
+                    },
+                    {
+                        name: "Snacks & Beverages",
+                        key: "snacks"
+                    },
+                    {
+                        name: "Desserts",
+                        key: "desserts"
+                    }
+                ];
+                const container =
+                    document.getElementById(
+                        "menuContainer"
+                    );
+                container.innerHTML =
+                    "";
+                let found =
+                    false;
+                // ======================
+                // CREATE MENU CATEGORIES
+                // ======================
+                meals.forEach(
+                    function (meal) {
+                        const items =
+                            menu.filter(
+                                function (item) {
+                                    const itemMeal =
+                                        (
+                                            item.meal || ""
+                                        )
+                                            .toLowerCase()
+                                            .trim();
+                                    const mealMatch =
+                                        !mealFilter ||
+                                        meal.key === mealFilter;
+                                    const dishMatch =
+                                        !dish ||
+                                        (
+                                            item.name || ""
+                                        )
+                                            .toLowerCase()
+                                            .includes(
+                                                dish
+                                            );
+                                    return (
+                                        itemMeal ===
+                                        meal.name.toLowerCase()
+                                        &&
+                                        mealMatch
+                                        &&
+                                        dishMatch
+                                    );
+                                }
+                            );
+                        if (
+                            items.length === 0
+                        ) {
+                            return;
+                        }
+                        found =
+                            true;
+                        // ======================
+                        // CREATE SECTION
+                        // ======================
+                        const section =
+                            document.createElement(
+                                "div"
+                            );
+                        section.className =
+                            "menu-section";
+                        section.id =
+                            `menu-section-${meal.key}`;
+                        section.innerHTML = `
+                            <div class="menu-section-heading">
+                                <span>
+                                    DELICIOUS CHOICES
+                                </span>
+                                <h2>
+                                    ${meal.name}
+                                </h2>
+                            </div>
+                            <div class="menu-items">
+                                ${items.map(
+                            function (item) {
+                                // ======================
+                                // CREATE ITEM ID
+                                // ======================
+                                const itemId =
+                                    item._id ||
+                                    item.name
+                                        .replace(
+                                            /[^a-zA-Z0-9]/g,
+                                            "-"
+                                        );
+                                return `
+                                            <div
+                                                class="menu-item-card"
+                                                data-item-id="${itemId}"
+                                            >
+                                                <!-- DISH IMAGE -->
+                                                <div class="menu-item-image">
+                                                    ${item.image
+                                        ?
+                                        `<img
+                                                            src="${item.image}"
+                                                            alt="${item.name}"
+                                                            onerror="this.src='/assets/Dine.png'"
+                                                        >`
+                                        :
+                                        `<img
+                                                            src="/assets/Dine.png"
+                                                            alt="${item.name}"
+                                                        >`
+                                    }
+                                                </div>
+                                                <!-- DISH CONTENT -->
+                                                <div class="menu-item-content">
+                                                    <h3>
+                                                        ${item.name}
+                                                    </h3>
+                                                    <p class="menu-item-description">
+                                                        ${item.description ||
+                                    "Deliciously prepared with fresh ingredients and rich flavors."
+                                    }
+                                                    </p>
+                                                    <!-- PRICE + QUANTITY -->
+                                                    <div class="menu-item-bottom">
+                                                        <span class="menu-item-price">
+                                                            ₹${Number(
+                                        item.price
+                                    ).toFixed(2)}
+                                                        </span>
+                                                        <div
+                                                            class="quantity-control"
+                                                            id="quantity-${itemId}"
+                                                        >
+                                                            <button
+                                                                type="button"
+                                                                class="quantity-btn add-btn"
+                                                                onclick="increaseQuantity('${itemId}')"
+                                                            >
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `;
+                            }
+                        ).join("")}
+                            </div>
+                        `;
+                        container.appendChild(
+                            section
+                        );
+                    }
+                );
+                // ======================
+                // NO RESULTS
+                // ======================
+                if (!found) {
+                    container.innerHTML = `
+                        <div class="no-menu">
+                            <i class="fa fa-cutlery"></i>
+                            <h2>
+                                No matching items found
+                            </h2>
+                            <p>
+                                Try another category or explore
+                                our complete menu.
+                            </p>
+                            <a href="Menu.html">
+                                View Full Menu
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+                // ======================
+                // UPDATE QUANTITY UI
+                // ======================
+                updateAllQuantityControls();
+                // ======================
+                // SCROLL TO CATEGORY
+                // ======================
+                scrollToSelectedMeal(
+                    mealFilter
+                );
+            }
+            catch (error) {
+                console.error(
+                    "Menu loading error:",
+                    error
+                );
+                document.getElementById(
+                    "menuContainer"
+                ).innerHTML = `
+                    <div class="no-menu">
+                        <i class="fa fa-exclamation-circle"></i>
+                        <h2>
+                            Unable to load menu
+                        </h2>
+                        <p>
+                            Please make sure the server is running
+                            and try again.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        // ======================
+        // INITIAL LOAD
+        // ======================
+        updateNavigation();
+        updateCartNavbar();
+        loadMenu();
+    </script>
+</body>
+
+</html>
